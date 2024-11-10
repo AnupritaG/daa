@@ -1,0 +1,80 @@
+Name    : Auprita Anil Girme
+Roll no.: COBA56
+Subject : DAA
+
+
+class KnapsackPackage(object):
+    def __init__(self, weight, value):
+        self.weight = weight
+        self.value = value
+        self.cost = value / weight
+    def __lt__(self, other):
+        return self.cost < other.cost
+class FractionalKnapsack(object):
+    def knapsackGreProc(self, W, V, M, n):
+        packs = []
+        for i in range(n):
+            packs.append(KnapsackPackage(W[i], V[i]))
+        packs.sort(reverse=True)
+        remain = M
+        result = 0
+        i = 0
+        stopProc = False
+        while (stopProc != True):
+            if (packs[i].weight <= remain):
+                remain -= packs[i].weight;
+                result += packs[i].value;
+                print("Pack ", i, " - Weight ", packs[i].weight, " -Value ", packs[i].value)
+            if (packs[i].weight > remain):
+                i += 1
+            if (i == n):
+                stopProc = True
+        print("Max Value:\t", result)
+if __name__ == "__main__":
+    W = []
+    V = []
+    num = int(input("Enter the number of weights or values required:\n"))
+    for i in range(num):
+        n = int(input(f"Enter weight {i+1} : "))
+        W.append(n)
+    print("\n")
+    for i in range(num):
+        n = int(input(f"Enter value {i+1} : "))
+        V.append(n)
+    print("\n")
+    M = int(input("Enter the cost: "))
+    n = len(V)
+    print("\n")
+    proc = FractionalKnapsack()
+    proc.knapsackGreProc(W, V, M, n)
+
+
+
+
+
+
+Output:
+Enter the number of weights or values required:
+4
+Enter weight 1 : 10
+Enter weight 2 : 20
+Enter weight 3 : 56
+Enter weight 4 : 46
+
+
+Enter value 1 : 35
+Enter value 2 : 456
+Enter value 3 : 6
+Enter value 4 : 567
+
+
+Enter the cost: 43
+
+
+Pack  0  - Weight  20  -Value  456
+Pack  0  - Weight  20  -Value  456
+Max Value:	 912
+
+
+
+
